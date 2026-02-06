@@ -1,5 +1,10 @@
 import icon from '/icon.svg';
 
+/**
+ * Header component displaying the application logo and title
+ *
+ * @returns {JSX.Element} The header component
+ */
 const Header = () => {
   return (
     <div className="mb-4 flex items-center gap-3">

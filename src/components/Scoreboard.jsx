@@ -1,6 +1,16 @@
 import { Frown, PartyPopper } from 'lucide-react';
 import { settings } from '../constants';
 
+/**
+ * Scoreboard component displaying game statistics and results
+ * Shows correct/incorrect word counts, typing speed, accuracy, and WPM
+ *
+ * @param {Object} props - Component properties
+ * @param {boolean[]} props.correctWord - Array tracking correct/incorrect words
+ * @param {number} props.characterTyped - Total number of characters typed
+ * @param {number} props.seconds - Remaining seconds (0 if time ran out)
+ * @returns {JSX.Element} The scoreboard component
+ */
 const Scoreboard = ({ correctWord, characterTyped, seconds }) => {
   const correctCount = correctWord.filter(Boolean).length;
   const errorCount = correctWord.filter((isCorrect) => !isCorrect).length;
@@ -8,6 +18,7 @@ const Scoreboard = ({ correctWord, characterTyped, seconds }) => {
   const cps = elapsedSeconds > 0 ? Math.round(characterTyped / elapsedSeconds) : 0;
   const accuracy =
     correctWord.length > 0 ? Math.round((correctCount / correctWord.length) * 100) : 0;
+  const wpm = elapsedSeconds > 0 ? Math.round(characterTyped / 5 / (elapsedSeconds / 60)) : 0;
 
   return (
     <div className="mt-6 w-full max-w-xl rounded-2xl p-6">
@@ -34,6 +45,10 @@ const Scoreboard = ({ correctWord, characterTyped, seconds }) => {
 
       <div className="mb-4 rounded-xl p-4 text-center">
         <p className="text-lg font-medium text-foreground">{characterTyped} caractères tapés</p>
+        <p className="mt-1 text-sm text-muted">
+          Vitesse de frappe :{' '}
+          <span className="font-semibold text-primary">{wpm} mots / minute</span>
+        </p>
         <p className="mt-1 text-sm text-muted">
           Vitesse : <span className="font-semibold text-primary">{cps} caractères / seconde</span>
         </p>

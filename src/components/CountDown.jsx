@@ -1,22 +1,20 @@
 import { BellRing } from 'lucide-react';
-import { useEffect } from 'react';
+import useCountdown from '../hooks/useCountdown';
 
+/**
+ * Countdown timer component
+ * Displays remaining time and manages the countdown logic
+ *
+ * @param {Object} props - Component properties
+ * @param {number} props.seconds - Remaining seconds
+ * @param {boolean} props.hasStarted - Whether the game has started
+ * @param {boolean} props.isFinished - Whether the game is finished
+ * @param {Function} props.setSeconds - Function to update remaining seconds
+ * @param {Function} props.setIsFinished - Function to mark game as finished
+ * @returns {JSX.Element} The countdown component
+ */
 const CountDown = ({ seconds, hasStarted, isFinished, setSeconds, setIsFinished }) => {
-  useEffect(() => {
-    if (!hasStarted || isFinished) return;
-
-    const timerID = setInterval(() => {
-      setSeconds((prev) => {
-        if (prev <= 1) {
-          setIsFinished(true);
-          return 0;
-        }
-        return prev - 1;
-      });
-    }, 1000);
-
-    return () => clearInterval(timerID);
-  }, [hasStarted, isFinished, setIsFinished, setSeconds]);
+  useCountdown({ hasStarted, isFinished, setSeconds, setIsFinished });
 
   return (
     <div className="mb-6 text-center">

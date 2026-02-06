@@ -1,5 +1,21 @@
-import { useState } from 'react';
+import { isPrintableKey } from '../utils';
 
+/**
+ * Input component for typing game
+ * Handles user keyboard input and validates against current word
+ *
+ * @param {Object} props - Component properties
+ * @param {string} props.currentWord - The word currently being typed
+ * @param {boolean} props.isFinished - Whether the game is finished
+ * @param {boolean} props.hasStarted - Whether the game has started
+ * @param {Function} props.setCurrentWord - Function to advance to next word
+ * @param {Function} props.setCorrectWord - Function to track word correctness
+ * @param {Function} props.setCharacterTyped - Function to increment character count
+ * @param {Function} props.setHasStarted - Function to mark game as started
+ * @param {string} props.inputWord - Current input value
+ * @param {Function} props.setInputWord - Function to update input value
+ * @returns {JSX.Element} The input component
+ */
 const Input = ({
   currentWord,
   isFinished,
@@ -8,33 +24,65 @@ const Input = ({
   setCorrectWord,
   setCharacterTyped,
   setHasStarted,
+  inputWord,
+  setInputWord,
 }) => {
-  const [inputWord, setInputWord] = useState('');
-
+  /**
+   * Handles word submission when space is pressed
+   * Validates input against current word and moves to next word
+   */
   const handleWordChange = () => {
-    console.log('currentWord:', inputWord);
+    if (!inputWord.trim()) return;
+
+    setCorrectWord((prev) => [...prev, inputWord.trim() === currentWord]);
+
     setInputWord('');
     setCurrentWord();
-    setCorrectWord((prev) => [...prev, inputWord.trim() === currentWord]);
   };
 
+  /**
+   * Handles keyboard input events
+   * Filters non-printable keys and starts game on first valid input
+   *
+   * @param {KeyboardEvent} e - The keyboard event
+   */
   const handleKeyDown = (e) => {
-    if (!hasStarted) {
+    if (
+      !hasStarted &&
+      isPrintableKey(e) &&
+      e.key !== 'Backspace' &&
+      e.key !== ' ' &&
+      e.key !== 'Enter'
+    ) {
       setHasStarted(true);
     }
-    e.key === ' ' ? handleWordChange() : null;
+
+    if (e.key === ' ') {
+      e.preventDefault();
+
+      if (!inputWord.trim()) return;
+      handleWordChange();
+      return;
+    }
+
+    if (!isPrintableKey(e) && e.key !== 'Backspace' && e.key !== 'Enter') {
+      e.preventDefault();
+      return;
+    }
+
+    setCharacterTyped((prev) => prev + 1);
   };
 
   return (
     <input
-      className="mt-6 w-full max-w-md rounded-2xl border border-muted bg-gray-100 px-4 py-3 text-lg text-foreground shadow-sm focus:border-primary focus:bg-white focus:outline-none focus:ring-2 focus:ring-primary disabled:cursor-not-allowed disabled:bg-gray-200"
+      className="input"
       value={inputWord}
       disabled={isFinished}
       onChange={(e) => {
         setInputWord(e.target.value);
-        setCharacterTyped((prev) => prev + 1);
       }}
       onKeyDown={(e) => handleKeyDown(e)}
+      onPaste={(e) => e.preventDefault()}
     />
   );
 };

@@ -1,44 +1,36 @@
-import { useState, useMemo } from 'react';
 import Input from './components/Input';
 import Sentence from './components/Sentence';
-import { sentences, settings } from './constants';
-import { getRandomSentence } from './utils';
 import Scoreboard from './components/Scoreboard';
 import CountDown from './components/CountDown';
 import Header from './components/Header';
+import useTypingGame from './hooks/useTypingGame';
 
+/**
+ * Main application component for the typing game
+ * Orchestrates all game components and manages overall game flow
+ *
+ * @returns {JSX.Element} The main application component
+ */
 const App = () => {
-  const [sentence, setSentence] = useState(() => getRandomSentence(sentences));
-  const [currentWordIndex, setCurrentWordIndex] = useState(0);
-  const [correctWord, setCorrectWord] = useState([]);
-  const [isFinished, setIsFinished] = useState(false);
-  const [characterTyped, setCharacterTyped] = useState(0);
-  const [seconds, setSeconds] = useState(settings.initialSeconds);
-  const [hasStarted, setHasStarted] = useState(false);
-
-  const words = useMemo(() => sentence.split(' '), [sentence]);
-  const sentenceLength = words.length;
-  const currentWord = words[currentWordIndex];
-
-  const newGame = () => {
-    setSentence(getRandomSentence(sentences));
-    setCurrentWordIndex(0);
-    setCorrectWord([]);
-    setIsFinished(false);
-    setCharacterTyped(0);
-    setSeconds(settings.initialSeconds);
-    setHasStarted(false);
-  };
-
-  const setCurrentWord = () => {
-    setCurrentWordIndex((prevIndex) => {
-      const nextIndex = prevIndex + 1;
-      if (nextIndex >= sentenceLength) {
-        setIsFinished(true);
-      }
-      return nextIndex;
-    });
-  };
+  const {
+    sentence,
+    currentWord,
+    currentWordIndex,
+    correctWord,
+    isFinished,
+    characterTyped,
+    seconds,
+    hasStarted,
+    inputWord,
+    setCorrectWord,
+    setCharacterTyped,
+    setSeconds,
+    setHasStarted,
+    setInputWord,
+    setIsFinished,
+    newGame,
+    setCurrentWord,
+  } = useTypingGame();
 
   return (
     <div className="min-h-screen flex flex-col">
@@ -57,13 +49,16 @@ const App = () => {
 
             <Sentence
               sentence={sentence}
+              inputWord={inputWord}
               currentWordIndex={currentWordIndex}
               currentWord={currentWord}
               correctWord={correctWord}
             />
 
             <Input
+              inputWord={inputWord}
               currentWord={currentWord}
+              setInputWord={setInputWord}
               isFinished={isFinished}
               hasStarted={hasStarted}
               setHasStarted={setHasStarted}
