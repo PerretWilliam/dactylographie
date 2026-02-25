@@ -1,106 +1,107 @@
-# Test de dactylographie – React
+<div align="center">
+
+# Typing Speed Test
+
+**A sleek, real-time typing test built with React**
+
+[![React](https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB)](https://reactjs.org/)
+[![Vite](https://img.shields.io/badge/Vite-646CFF?style=for-the-badge&logo=vite&logoColor=white)](https://vitejs.dev/)
+[![Node.js](https://img.shields.io/badge/Node.js-339933?style=for-the-badge&logo=node.js&logoColor=white)](https://nodejs.org/)
+
+</div>
 
 ---
 
-## Fonctionnalités principales
+## Features
 
-### Texte à taper
+### Reference Text
 
-- Affichage d’un texte de référence à l’écran
-- Textes définis en dur dans l’application
-- Sélection aléatoire d’une phrase au démarrage et à chaque nouvelle partie
+- A reference sentence is displayed on screen for the user to type
+- Texts are hardcoded directly in the application
+- A random sentence is selected at the start of each new game
 
-### Zone de saisie
+### Input Field
 
-- Champ de saisie permettant à l’utilisateur de taper le texte
-- Validation d’un mot par appui sur la touche **espace**
-- Réinitialisation automatique du champ après chaque mot
+- A text input allows the user to type freely
+- Pressing **Space** validates the current word and moves to the next
+- The input field resets automatically after each word
 
-### Comparaison de la saisie
+### Real-time Comparison
 
-- Comparaison caractère par caractère avec le texte attendu
-- Chaque mot est identifié comme :
-  - correct
-  - incorrect
-  - non encore saisi
+- Each character is compared against the expected text in real time
+- Each word is classified as:
+  - **Correct** — typed without any mistake
+  - **Incorrect** — contains at least one error
+  - **Not yet typed** — waiting to be entered
+- The current word is visually highlighted at all times
 
-- Mise en évidence visuelle du mot courant
+### Timer
 
-### Gestion du temps
+- Each game lasts exactly **60 seconds**
+- The countdown starts on the **first keystroke**
+- The game ends automatically when time runs out
 
-- Partie limitée à une durée fixe (60 secondes)
-- Démarrage du chronomètre au premier caractère saisi
-- Fin automatique de la partie lorsque le temps est écoulé
+### End of Game
 
-### Fin de partie
-
-- Blocage de la saisie à la fin de la partie
-- Affichage d’un récapitulatif comprenant :
-  - le nombre de caractères tapés
-  - le nombre de mots corrects
-  - le nombre de mots incorrects
+- Input is locked once time is up
+- A summary screen displays:
+  - Total characters typed
+  - Number of correct words
+  - Number of incorrect words
 
 ---
 
-## Extensions réalisées
+## Extended Features
 
-Les améliorations suivantes ont été implémentées :
-
-### Statistiques
-
-- Calcul de la vitesse de frappe en **caractères par seconde**
-- Calcul de la **précision** en pourcentage
-
-### Feedback visuel
-
-- Surlignage du mot courant
-- Coloration des mots corrects et incorrects
-- Affichage dynamique du chronomètre
-
-### Mode rejouable
-
-- Bouton permettant de lancer une nouvelle partie
-- Réinitialisation complète de l’état de l’application
+| Feature             | Description                                                         |
+| ------------------- | ------------------------------------------------------------------- |
+| **Typing Speed**    | Calculates your speed in characters per second                      |
+| **Accuracy**        | Displays your accuracy as a percentage                              |
+| **Visual Feedback** | Color-coded words (correct / incorrect) with current word highlight |
+| **Replay Mode**     | A "New Game" button fully resets the app state                      |
 
 ---
 
 ## Installation
 
-### Prérequis
+### Prerequisites
 
-- Node.js récent
+- [Node.js](https://nodejs.org/) (recent version) — or [Bun](https://bun.sh/) as an alternative
 
-### Installation des dépendances
+### Clone the repository
 
 ```bash
-npm install
+git clone https://github.com/PerretWilliam/typing-speed-test.git
+cd typing-speed-test
 ```
 
-Alternative avec Bun :
+### Install dependencies
 
 ```bash
+# With npm
+npm install
+
+# Or with Bun
 bun install
 ```
 
 ---
 
-## Lancement en développement
+## Usage
+
+### Development mode
 
 ```bash
 npm run dev
 ```
 
----
-
-## Build de production
+### Production build
 
 ```bash
 npm run build
 ```
 
----
-
-## Prévisualisation du build
+### Preview the build
 
 ```bash
 npm run preview
@@ -108,20 +109,20 @@ npm run preview
 
 ---
 
-## Utilisation de l’application
+## How to Play
 
-1. Lancer l’application en mode développement.
-2. Le texte à taper s’affiche à l’écran.
-3. Commencer à taper : le chronomètre démarre au premier caractère.
-4. Appuyer sur **espace** pour valider un mot et passer au suivant.
-5. À la fin du temps imparti, la saisie est bloquée et un récapitulatif s’affiche.
-6. Cliquer sur **Nouvelle Partie** pour recommencer.
+1. **Launch** the app in development mode
+2. **Read** the reference text displayed on screen
+3. **Start typing** — the timer begins on your first keystroke
+4. **Press Space** to validate each word and move to the next
+5. **Keep going** until the 60 seconds are up — input will lock automatically
+6. **Check your stats** in the end-of-game summary
+7. **Click "New Game"** to play again with a fresh sentence
 
 ---
 
-## Auteur
+## Author
 
-- William Perret
-  - GitHub : [PerretWilliam](https://github.com/PerretWilliam)
-  - Portfolio: [william-perret.fr](https://william-perret.fr)
-  - LinkedIn: [William Perret](https://www.linkedin.com/in/william-perret-7102b7327)
+Made by [William Perret](https://william-perret.fr)
+
+[Website](https://william-perret.fr) · [GitHub](https://github.com/PerretWilliam) · [LinkedIn](https://www.linkedin.com/in/william-perret-7102b7327) · [Instagram](https://www.instagram.com/williamprrt/profilecard/?igsh=MWoza3kxbXpybmhybQ==) · [Buy Me a Coffee](https://buymeacoffee.com/perretwilliam)
