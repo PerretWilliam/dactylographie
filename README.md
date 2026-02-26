@@ -71,8 +71,8 @@
 ### Clone the repository
 
 ```bash
-git clone https://github.com/PerretWilliam/typing-speed-test.git
-cd typing-speed-test
+git clone https://github.com/PerretWilliam/typefast.git
+cd typefast
 ```
 
 ### Install dependencies
