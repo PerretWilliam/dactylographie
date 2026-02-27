@@ -4,13 +4,13 @@
  * and upcoming words in default color
  *
  * @param {Object} props - Component properties
- * @param {string} props.sentence - The full sentence to display
+ * @param {string[]} props.words - The sentence split into words
  * @param {number} props.currentWordIndex - Index of the word being typed
  * @param {boolean[]} props.correctWord - Array tracking if each word was typed correctly
  * @param {string} props.inputWord - Current input being typed
  * @returns {JSX.Element} The sentence display component
  */
-const Sentence = ({ sentence, currentWordIndex, correctWord, inputWord }) => {
+const Sentence = ({ words, currentWordIndex, correctWord, inputWord }) => {
   /**
    * Renders a single word with appropriate styling based on its state
    *
@@ -28,11 +28,12 @@ const Sentence = ({ sentence, currentWordIndex, correctWord, inputWord }) => {
       return (
         <span className="underline underline-offset-4">
           {word.split('').map((char, i) => {
-            let className = 'text-gray-400';
-
-            if (inputWord[i] !== undefined) {
-              className = inputWord[i] === char ? 'text-green-600' : 'text-red-500';
-            }
+            const className =
+              inputWord[i] === undefined
+                ? 'text-gray-400'
+                : inputWord[i] === char
+                  ? 'text-green-600'
+                  : 'text-red-500';
 
             return (
               <span key={i} className={className}>
@@ -50,7 +51,7 @@ const Sentence = ({ sentence, currentWordIndex, correctWord, inputWord }) => {
 
   return (
     <div className="mx-auto max-w-2xl px-6 text-center text-3xl leading-relaxed">
-      {sentence.split(' ').map((word, index) => (
+      {words.map((word, index) => (
         <span key={index} className="mx-1 inline-block">
           {renderWord(word, index)}
         </span>

@@ -32,9 +32,10 @@ const Input = ({
    * Validates input against current word and moves to next word
    */
   const handleWordChange = () => {
-    if (!inputWord.trim()) return;
+    const trimmedWord = inputWord.trim();
+    if (!trimmedWord) return;
 
-    setCorrectWord((prev) => [...prev, inputWord.trim() === currentWord]);
+    setCorrectWord((prev) => [...prev, trimmedWord === currentWord]);
 
     setInputWord('');
     setCurrentWord();
@@ -47,30 +48,31 @@ const Input = ({
    * @param {KeyboardEvent} e - The keyboard event
    */
   const handleKeyDown = (e) => {
-    if (
-      !hasStarted &&
-      isPrintableKey(e) &&
-      e.key !== 'Backspace' &&
-      e.key !== ' ' &&
-      e.key !== 'Enter'
-    ) {
+    const isSpace = e.key === ' ';
+    const isEnter = e.key === 'Enter';
+    const isBackspace = e.key === 'Backspace';
+
+    const isPrintable = isPrintableKey(e);
+    const isAllowedControlKey = isBackspace || isEnter;
+
+    if (!hasStarted && isPrintable && !isSpace) {
       setHasStarted(true);
     }
 
-    if (e.key === ' ') {
+    if (isSpace) {
       e.preventDefault();
-
-      if (!inputWord.trim()) return;
       handleWordChange();
       return;
     }
 
-    if (!isPrintableKey(e) && e.key !== 'Backspace' && e.key !== 'Enter') {
+    if (!isPrintable && !isAllowedControlKey) {
       e.preventDefault();
       return;
     }
 
-    setCharacterTyped((prev) => prev + 1);
+    if (isPrintable) {
+      setCharacterTyped((prev) => prev + 1);
+    }
   };
 
   return (

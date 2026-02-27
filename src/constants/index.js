@@ -2,7 +2,7 @@ export const settings = {
   initialSeconds: 60,
 };
 
-// French sentences for typing practice (≈50 words)
+// French sentences for typing practice (50 words)
 export const sentences = [
   'Le matin, lorsque la ville se réveille doucement, les passants marchent rapidement sur les trottoirs encore humides, les cafés ouvrent leurs portes, les bus circulent, et chacun commence sa journée en pensant aux tâches importantes à accomplir avant la fin de la journée.',
 

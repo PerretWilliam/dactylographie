@@ -13,7 +13,7 @@ import useTypingGame from './hooks/useTypingGame';
  */
 const App = () => {
   const {
-    sentence,
+    words,
     currentWord,
     currentWordIndex,
     correctWord,
@@ -48,10 +48,9 @@ const App = () => {
             />
 
             <Sentence
-              sentence={sentence}
+              words={words}
               inputWord={inputWord}
               currentWordIndex={currentWordIndex}
-              currentWord={currentWord}
               correctWord={correctWord}
             />
 

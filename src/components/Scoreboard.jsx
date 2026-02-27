@@ -12,17 +12,26 @@ import { settings } from '../constants';
  * @returns {JSX.Element} The scoreboard component
  */
 const Scoreboard = ({ correctWord, characterTyped, seconds }) => {
+  // Count correct and incorrect words
   const correctCount = correctWord.filter(Boolean).length;
   const errorCount = correctWord.filter((isCorrect) => !isCorrect).length;
+
+  // Calculate elapsed time based on initial seconds and remaining seconds
   const elapsedSeconds = settings.initialSeconds - seconds;
-  const cps = elapsedSeconds > 0 ? Math.round(characterTyped / elapsedSeconds) : 0;
+
+  // Check if any time has elapsed and if there is remaining time to avoid division by zero
+  const hasElapsedTime = elapsedSeconds > 0;
+  const hasRemainingTime = seconds > 0;
+
+  // Calculate characters per second, accuracy percentage, and words per minute
+  const cps = hasElapsedTime ? Math.round(characterTyped / elapsedSeconds) : 0;
   const accuracy =
     correctWord.length > 0 ? Math.round((correctCount / correctWord.length) * 100) : 0;
-  const wpm = elapsedSeconds > 0 ? Math.round(characterTyped / 5 / (elapsedSeconds / 60)) : 0;
+  const wpm = hasElapsedTime ? Math.round(characterTyped / 5 / (elapsedSeconds / 60)) : 0;
 
   return (
     <div className="mt-6 w-full max-w-xl rounded-2xl p-6">
-      {seconds > 0 ? (
+      {hasRemainingTime ? (
         <h2 className="mb-4 text-center text-2xl font-semibold text-primary flex items-center justify-center gap-2">
           <PartyPopper /> Félicitations !
         </h2>
@@ -61,7 +70,7 @@ const Scoreboard = ({ correctWord, characterTyped, seconds }) => {
         </p>
       </div>
 
-      {seconds > 0 && (
+      {hasRemainingTime && (
         <p className="text-center text-sm text-muted">
           Temps restant : <span className="font-medium text-foreground">{seconds}s</span>
         </p>

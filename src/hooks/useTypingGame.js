@@ -7,6 +7,7 @@ import { getRandomSentence } from '../utils';
  *
  * @returns {Object} The typing game state and methods
  * @returns {string} returns.sentence - Current sentence to type
+ * @returns {string[]} returns.words - Current sentence split into words
  * @returns {string} returns.currentWord - Current word being typed
  * @returns {number} returns.currentWordIndex - Index of the current word
  * @returns {boolean[]} returns.correctWord - Array tracking correct/incorrect words
@@ -68,6 +69,7 @@ const useTypingGame = () => {
   return {
     // States
     sentence,
+    words,
     currentWord,
     currentWordIndex,
     correctWord,

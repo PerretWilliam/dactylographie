@@ -24,9 +24,9 @@ const CountDown = ({ seconds, hasStarted, isFinished, setSeconds, setIsFinished 
             Temps restant : <span className="font-semibold">{seconds}s</span>
           </>
         ) : (
-          <div className="flex items-center justify-center gap-2">
+          <span className="flex items-center justify-center gap-2">
             <BellRing /> Temps écoulé !
-          </div>
+          </span>
         )}
       </p>
     </div>
